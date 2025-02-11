@@ -31,7 +31,7 @@ selected_year = st.sidebar.number_input("Selecione o Ano", min_value=2000, max_v
 df_calendar = generate_calendar(selected_year)
 
 # Carregar o arquivo Excel diretamente da pasta local
-file_path = "/home/wendel/Área de Trabalho/wendel/automacoes/calendrio/olímpiadas - Página1 (2)_1.csv"
+file_path = "olímpiadas - Página1 (2)_1.csv"
 try:
     df_temp = pd.read_csv(file_path)
     st.write("Colunas encontradas no arquivo:", df_temp.columns)  # Debug: Verificar colunas
