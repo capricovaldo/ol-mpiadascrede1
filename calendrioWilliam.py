@@ -62,14 +62,7 @@ df_calendar["Data"] = df_calendar["Dia"].astype(str) + "/" + df_calendar["Mês"]
 df_calendar["Evento"] = df_calendar["Data"].map(dates_dict).fillna("-")
 
 # Aplicar estilo no DataFrame para ajuste de largura e quebra de linha
-styled_df = df_calendar.style.set_properties(subset=['Evento'], **{
-    'white-space': 'pre-wrap',  
-    'width': '200px',  
-    'max-width': '300px',  
-    'overflow': 'hidden', 
-    'text-overflow': 'ellipsis'  
-})
-
+st.data_editor(df_calendar, height=600, use_container_width=True)
 
 
 st.dataframe(df_calendar, height=600)
