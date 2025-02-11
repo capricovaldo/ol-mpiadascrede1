@@ -63,11 +63,11 @@ df_calendar["Evento"] = df_calendar["Data"].map(dates_dict).fillna("-")
 
 # Aplicar estilo no DataFrame para ajuste de largura e quebra de linha
 styled_df = df_calendar.style.set_properties(subset=['Evento'], **{
-    'white-space': 'pre-wrap',  # Quebra de linha
-    'width': '200px',  # Ajuste de largura
-    'max-width': '300px',  # Máxima largura das células
-    'overflow': 'hidden',  # Impede texto que ultrapassa
-    'text-overflow': 'ellipsis'  # Adiciona reticências quando o texto é muito longo
+    'white-space': 'pre-wrap',  
+    'width': '200px',  
+    'max-width': '300px',  
+    'overflow': 'hidden', 
+    'text-overflow': 'ellipsis'  
 })
 
 
