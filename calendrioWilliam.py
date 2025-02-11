@@ -68,6 +68,7 @@ styled_df = df_calendar.style.set_properties(subset=['Evento'], **{
     'max-width': '300px',  # Máxima largura das células
     'overflow': 'hidden',  # Impede texto que ultrapassa
     'text-overflow': 'ellipsis'  # Adiciona reticências quando o texto é muito longo
+})
 
 
 
