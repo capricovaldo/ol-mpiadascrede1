@@ -61,8 +61,7 @@ except Exception as e:
 df_calendar["Data"] = df_calendar["Dia"].astype(str) + "/" + df_calendar["Mês"].astype(str).str.zfill(2)
 df_calendar["Evento"] = df_calendar["Data"].map(dates_dict).fillna("-")
 
-# Aplicar estilo no DataFrame para ajuste de largura e quebra de linha
-st.data_editor(df_calendar, height=600, use_container_width=True)
+
 
 
 st.dataframe(df_calendar, height=600)
@@ -75,3 +74,6 @@ st.write(f"### 📌 Eventos no mês de {calendar.month_name[selected_month]}")
 st.dataframe(df_filtered, height=400)
 
 st.sidebar.info("O calendário está sendo carregado automaticamente do arquivo local: olímpiadas.xlsx")
+
+# Aplicar estilo no DataFrame para ajuste de largura e quebra de linha
+st.data_editor(df_calendar, height=600, use_container_width=True)
