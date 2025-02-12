@@ -38,20 +38,28 @@ try:
     df_events["Fim"] = pd.to_datetime(df_events["Fim"], dayfirst=True, errors="coerce")
     
     dates_dict = {}
+    
     for _, row in df_events.iterrows():
+        event_info = f"📌 {row['Nome']}:"
+
+        # Adicionar data de início se existir
         if pd.notna(row["Início"]):
             start_date_str = row["Início"].strftime("%d/%m")
+            event_info += f"\n- Início: {start_date_str}"
             if start_date_str in dates_dict:
-                dates_dict[start_date_str] += f"\n{row['Nome']} (Início)"
+                dates_dict[start_date_str] += f"\n{event_info}"
             else:
-                dates_dict[start_date_str] = f"{row['Nome']} (Início)"
+                dates_dict[start_date_str] = event_info
         
+        # Adicionar data de fim se existir
         if pd.notna(row["Fim"]):
             end_date_str = row["Fim"].strftime("%d/%m")
+            event_info += f"\n- Fim: {end_date_str}"
             if end_date_str in dates_dict:
-                dates_dict[end_date_str] += f"\n{row['Nome']} (Fim)"
+                dates_dict[end_date_str] += f"\n{event_info}"
             else:
-                dates_dict[end_date_str] = f"{row['Nome']} (Fim)"
+                dates_dict[end_date_str] = event_info
+
 except FileNotFoundError:
     st.error(f"O arquivo {file_path} não foi encontrado. Certifique-se de que ele está na mesma pasta do código.")
     df_events = pd.DataFrame(columns=["Nome", "Início", "Fim"])
