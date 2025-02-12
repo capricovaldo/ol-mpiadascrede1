@@ -77,7 +77,6 @@ st.sidebar.info("O calendário está sendo carregado automaticamente do arquivo 
 st.markdown("---")  # Linha separadora
 st.image(
     "crede01.png",  # Certifique-se de salvar a imagem como 'rodape.png' no mesmo diretório  
-    use_column_width=True,
     use_container_width=True
 )
 
