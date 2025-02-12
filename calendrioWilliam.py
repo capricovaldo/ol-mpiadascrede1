@@ -3,11 +3,11 @@ import pandas as pd
 import calendar
 from datetime import datetime
 
-# # Certificar-se de que openpyxl está instalado
-# try:
-#     import openpyxl
-# except ImportError:
-#     st.error("A biblioteca 'openpyxl' não está instalada. Instale com 'pip install openpyxl'.")
+# Certificar-se de que openpyxl está instalado
+try:
+    import openpyxl
+except ImportError:
+    st.error("A biblioteca 'openpyxl' não está instalada. Instale com 'pip install openpyxl'.")
 
 # Função para gerar um DataFrame com as datas do ano selecionado
 def generate_calendar(year):
@@ -41,25 +41,15 @@ try:
     dates_dict = {}
     
     for _, row in df_events.iterrows():
-        event_name = f"📌 {row['Nome']}"
-
-        # Adicionar data de início se existir
-        if pd.notna(row["Início"]):
+        if pd.notna(row["Início"]) and pd.notna(row["Fim"]):
             start_date_str = row["Início"].strftime("%d/%m")
-            start_event = f"{event_name} (Início)"
-            if start_date_str in dates_dict:
-                dates_dict[start_date_str] += f"\n{start_event}"
-            else:
-                dates_dict[start_date_str] = start_event
-        
-        # Adicionar data de fim se existir
-        if pd.notna(row["Fim"]):
             end_date_str = row["Fim"].strftime("%d/%m")
-            end_event = f"{event_name} (Fim)"
-            if end_date_str in dates_dict:
-                dates_dict[end_date_str] += f"\n{end_event}"
-            else:
-                dates_dict[end_date_str] = end_event
+            dates_str = f"📌 {row['Nome']}: {start_date_str} - {end_date_str}"
+            for date_str in [start_date_str, end_date_str]:  # Adicionar em ambas as datas
+                if date_str in dates_dict:
+                    dates_dict[date_str] += f"\n{dates_str}"
+                else:
+                    dates_dict[date_str] = dates_str
 
 except FileNotFoundError:
     st.error(f"O arquivo {file_path} não foi encontrado. Certifique-se de que ele está na mesma pasta do código.")
