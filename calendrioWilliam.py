@@ -71,3 +71,12 @@ st.write(f"### 📌 Eventos no mês de {calendar.month_name[selected_month]}")
 st.data_editor(df_filtered, height=400, use_container_width=True)  # Apenas a tabela filtrada
 
 st.sidebar.info("O calendário está sendo carregado automaticamente do arquivo local.")
+
+
+# Adicionar uma imagem como rodapé
+st.markdown("---")  # Linha separadora
+st.image(
+    "crede01.png",  # Certifique-se de salvar a imagem como 'rodape.png' no mesmo diretório
+    caption="Secretaria da Educação do Ceará - CREDE 1 Maracanaú",
+    use_column_width=True,
+)
