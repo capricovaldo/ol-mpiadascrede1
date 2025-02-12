@@ -3,11 +3,6 @@ import pandas as pd
 import calendar
 from datetime import datetime
 
-# Certificar-se de que openpyxl está instalado
-try:
-    import openpyxl
-except ImportError:
-    st.error("A biblioteca 'openpyxl' não está instalada. Instale com 'pip install openpyxl'.")
 
 # Função para gerar um DataFrame com as datas do ano selecionado
 def generate_calendar(year):
