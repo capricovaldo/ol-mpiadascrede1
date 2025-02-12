@@ -41,10 +41,17 @@ try:
     for _, row in df_events.iterrows():
         if pd.notna(row["Início"]):
             start_date_str = row["Início"].strftime("%d/%m")
-            dates_dict[start_date_str] = f"{row['Nome']} (Início)"
+            if start_date_str in dates_dict:
+                dates_dict[start_date_str] += f"\n{row['Nome']} (Início)"
+            else:
+                dates_dict[start_date_str] = f"{row['Nome']} (Início)"
+        
         if pd.notna(row["Fim"]):
             end_date_str = row["Fim"].strftime("%d/%m")
-            dates_dict[end_date_str] = f"{row['Nome']} (Fim)"
+            if end_date_str in dates_dict:
+                dates_dict[end_date_str] += f"\n{row['Nome']} (Fim)"
+            else:
+                dates_dict[end_date_str] = f"{row['Nome']} (Fim)"
 except FileNotFoundError:
     st.error(f"O arquivo {file_path} não foi encontrado. Certifique-se de que ele está na mesma pasta do código.")
     df_events = pd.DataFrame(columns=["Nome", "Início", "Fim"])
