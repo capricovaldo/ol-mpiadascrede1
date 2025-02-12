@@ -37,6 +37,7 @@ try:
     df_events["Início"] = pd.to_datetime(df_events["Início"], dayfirst=True, errors="coerce")
     df_events["Fim"] = pd.to_datetime(df_events["Fim"], dayfirst=True, errors="coerce")
     
+    # Dicionário para armazenar eventos por data
     dates_dict = {}
     
     for _, row in df_events.iterrows():
@@ -70,7 +71,7 @@ except Exception as e:
     dates_dict = {}
 
 # Criar coluna com as datas e marcar eventos no calendário
-df_calendar["Data"] = df_calendar["Dia"].astype(str) + "/" + df_calendar["Mês"].astype(str).str.zfill(2)
+df_calendar["Data"] = df_calendar["Dia"].astype(str).str.zfill(2) + "/" + df_calendar["Mês"].astype(str).str.zfill(2)
 df_calendar["Evento"] = df_calendar["Data"].map(dates_dict).fillna("-")
 
 # Sidebar para filtro por mês
