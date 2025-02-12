@@ -40,25 +40,25 @@ try:
     dates_dict = {}
     
     for _, row in df_events.iterrows():
-        event_info = f"📌 {row['Nome']}:"
+        event_name = f"📌 {row['Nome']}"
 
         # Adicionar data de início se existir
         if pd.notna(row["Início"]):
             start_date_str = row["Início"].strftime("%d/%m")
-            event_info += f"\n- Início: {start_date_str}"
+            start_event = f"{event_name} (Início)"
             if start_date_str in dates_dict:
-                dates_dict[start_date_str] += f"\n{event_info}"
+                dates_dict[start_date_str] += f"\n{start_event}"
             else:
-                dates_dict[start_date_str] = event_info
+                dates_dict[start_date_str] = start_event
         
         # Adicionar data de fim se existir
         if pd.notna(row["Fim"]):
             end_date_str = row["Fim"].strftime("%d/%m")
-            event_info += f"\n- Fim: {end_date_str}"
+            end_event = f"{event_name} (Fim)"
             if end_date_str in dates_dict:
-                dates_dict[end_date_str] += f"\n{event_info}"
+                dates_dict[end_date_str] += f"\n{end_event}"
             else:
-                dates_dict[end_date_str] = event_info
+                dates_dict[end_date_str] = end_event
 
 except FileNotFoundError:
     st.error(f"O arquivo {file_path} não foi encontrado. Certifique-se de que ele está na mesma pasta do código.")
@@ -69,16 +69,19 @@ except Exception as e:
     df_events = pd.DataFrame(columns=["Nome", "Início", "Fim"])
     dates_dict = {}
 
-# Exibição do calendário com filtro
+# Criar coluna com as datas e marcar eventos no calendário
 df_calendar["Data"] = df_calendar["Dia"].astype(str) + "/" + df_calendar["Mês"].astype(str).str.zfill(2)
 df_calendar["Evento"] = df_calendar["Data"].map(dates_dict).fillna("-")
 
+# Sidebar para filtro por mês
 st.sidebar.subheader("Filtrar por Mês")
 selected_month = st.sidebar.selectbox("Escolha um mês", list(range(1, 13)), format_func=lambda x: calendar.month_name[x])
 
+# Filtrar o DataFrame para o mês selecionado
 df_filtered = df_calendar[df_calendar["Mês"] == selected_month]
 
+# Exibir apenas os eventos do mês escolhido
 st.write(f"### 📌 Eventos no mês de {calendar.month_name[selected_month]}")
-st.data_editor(df_filtered, height=400, use_container_width=True)  # Exibe apenas a tabela filtrada
+st.data_editor(df_filtered, height=400, use_container_width=True)  # Apenas a tabela filtrada
 
 st.sidebar.info("O calendário está sendo carregado automaticamente do arquivo local.")
