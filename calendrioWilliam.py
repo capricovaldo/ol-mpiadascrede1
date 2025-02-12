@@ -76,7 +76,8 @@ st.sidebar.info("O calendário está sendo carregado automaticamente do arquivo 
 # Adicionar uma imagem como rodapé
 st.markdown("---")  # Linha separadora
 st.image(
-    "crede01.png",  # Certifique-se de salvar a imagem como 'rodape.png' no mesmo diretório
-    caption="Secretaria da Educação do Ceará - CREDE 1 Maracanaú",
+    "crede01.png",  # Certifique-se de salvar a imagem como 'rodape.png' no mesmo diretório  
     use_column_width=True,
 )
+
+
