@@ -76,7 +76,7 @@ st.sidebar.info("O calendário está sendo carregado automaticamente do arquivo 
 # Adicionar uma imagem como rodapé
 st.markdown("---")  # Linha separadora
 st.image(
-    "crede01.png",  # Certifique-se de salvar a imagem como 'rodape.png' no mesmo diretório  
+    "crede01 maracanau.png",  # Certifique-se de salvar a imagem como 'rodape.png' no mesmo diretório  
     use_container_width=True
 )
 
